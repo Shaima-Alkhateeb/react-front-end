@@ -18,7 +18,7 @@ test('Can change the name', async () => {
     const inputGender = screen.getByTestId('gender-input');
 
     fireEvent.change(inputNmae, { target: { value: 'shaima' } });
-    fireEvent.change(inputAge, { target: { value: '25' } });
+    fireEvent.change(inputAge, { target: { value: '55' } });
     fireEvent.change(inputGender, { target: { value: 'female' } });
 
     // expect().toHaveTextContent()
