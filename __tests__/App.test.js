@@ -4,6 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import App from "./App";
 import Person from "../component/Person";
 
+
 test("Load and displays starter data", async () => {
   render(<App />);
   const person = await waitFor(() => screen.findByTestId('person'));
