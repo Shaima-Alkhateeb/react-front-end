@@ -1,14 +1,14 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../index.css';
 
 export default function Person() {
-  const [name, setName] = useState('your name');
-  const [age, setAge] = useState('your age');
-  const [gender, setGender] = useState('your gender');
-  const [newAge, setNewAge] = useState('Your Age + 5 Years');
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [newAge, setNewAge] = useState();
 
   function handleSubmmit(e) {
     e.preventDefault();
@@ -16,7 +16,7 @@ export default function Person() {
     // setAge(e.target.age.value);
     // setGender(e.target.gender.value);
     // setNewAge(parseInt(age) + 5);
-    getNewAge();
+    getNewAge(age);
   }
 
   function handleNameChange(e) {
@@ -31,9 +31,12 @@ export default function Person() {
     setGender(e.target.value);
   }
 
-  async function getNewAge() {
-    await axios.post('https://express-server401.herokuapp.com/person')
+
+  function getNewAge() {
+    // console.log('age', age);
+    axios.post(`https://express-server401.herokuapp.com/person?name=${name}&age=${age}&gender=${gender}`)
       .then(res => {
+        console.log(res);
         setNewAge(res.data);
       })
       .catch(err => {
@@ -74,7 +77,8 @@ export default function Person() {
           <Form.Label data-testid='Name'>Name: {name}</Form.Label> <br></br>
           <Form.Label data-testid='Age'>Age: {age}</Form.Label> <br></br>
           <Form.Label data-testid='Gender'>Gender: {gender}</Form.Label> <br></br>
-          <Form.Label id="new-age" data-testid='NewAge'>New Age: {newAge}</Form.Label>
+          {/* {console.log(newAge)} */}
+          <Form.Label id="new-age" data-testid='newAge'>New Age: {newAge}</Form.Label>
         </Form.Group>
 
       </Form>
